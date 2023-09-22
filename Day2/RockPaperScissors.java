@@ -7,34 +7,60 @@ import java.util.ArrayList;
 
 public class RockPaperScissors {
     public static void main(String[] args) {
-        ArrayList<Integer> points = new ArrayList<>();
 
         BufferedReader reader;
+        int osszeg = 0;
+
         int X = 1;
         int Y = 2;
         int Z = 3;
-        int osszeg = 0;
+
+        int win = 6;
+        int tie = 3;
+        int lose = 0;
 
         try {
             reader = new BufferedReader(new FileReader("rock_paper_scissors.txt"));
             String oldline = reader.readLine();
 
             while (oldline != null) {
+
+                if (oldline.charAt(2) == 'X') {
+                    if (oldline.charAt(0) == 'A') {
+                        osszeg += Z + lose;
+                    }
+                    if (oldline.charAt(0) == 'B') {
+                        osszeg += X + lose;
+                    }
+                    if (oldline.charAt(0) == 'C') {
+                        osszeg += Y + lose;
+                    }
+                }
+                if (oldline.charAt(2) == 'Y') {
+                    if (oldline.charAt(0) == 'A') {
+                        osszeg += X + tie;
+                    }
+                    if (oldline.charAt(0) == 'B') {
+                        osszeg += Y + tie;
+                    }
+                    if (oldline.charAt(0) == 'C') {
+                        osszeg += Z + tie;
+                    }
+                }
+                if (oldline.charAt(2) == 'Z') {
+                    if (oldline.charAt(0) == 'A') {
+                        osszeg += Y + win;
+                    }
+                    if (oldline.charAt(0) == 'B') {
+                        osszeg += Z + win;
+                    }
+                    if (oldline.charAt(0) == 'C') {
+                        osszeg += X + win;
+                    }
+                }
+                System.out.println(osszeg);
                 oldline = reader.readLine();
-                if ((oldline.charAt(0) == 'A' && oldline.charAt(2) == 'X') ||
-                        (oldline.charAt(0) == 'B' && oldline.charAt(2) == 'Y') ||
-                        (oldline.charAt(0) == 'C' && oldline.charAt(2) == 'Z')) {
-                    osszeg = osszeg + 3;
-                }
-                if (oldline.charAt(0) == 'A' && oldline.charAt(2) == 'Y') {
-                    osszeg = osszeg + 8;
-                }
-                if (oldline.charAt(0) == 'B' && oldline.charAt(2) == 'Z') {
-                    osszeg = osszeg + 9;
-                }
-                if (oldline.charAt(0) == 'C' && oldline.charAt(2) == 'X') {
-                    osszeg = osszeg + 7;
-                }
+
             }
             System.out.println(osszeg);
 

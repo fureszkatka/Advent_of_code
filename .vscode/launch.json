@@ -1,29 +1,18 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Calories",
-            "request": "launch",
-            "mainClass": "Calories",
-            "projectName": "Advent_of_code_7df7820b"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)",
-            "request": "launch",
-            "mainClass": "Calories.Main", // Replace with your main class
-            "args": [],       // Command-line arguments
-            "projectName": "Advent_of_code"  // Your project's name
-        }
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Racksacks_Part_two",
+      "request": "launch",
+      "mainClass": "Day3.Racksacks_Part_two",
+      "projectName": "Advent_of_code_7df7820b"
+    },
+    {
+      "type": "java",
+      "name": "Racksacks",
+      "request": "launch",
+      "mainClass": "Day3.Racksacks",
+      "projectName": "Advent_of_code_7df7820b"
+    }
+  ]
 }
