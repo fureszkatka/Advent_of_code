@@ -13,14 +13,13 @@ public class Racksacks_Part_two {
     public static void main(String[] args) {
         BufferedReader reader;
 
-        Map<Character, List<Integer>> similar = new HashMap<>();
         ArrayList<String> lines = new ArrayList<>();
 
         try {
-            reader = new BufferedReader(new FileReader("proba.txt"));
+            reader = new BufferedReader(new FileReader("Racksacks_items.txt"));
             String oldline = reader.readLine();
+            List<Map<Character, List<Integer>>> outterArray = new ArrayList<>();
 
-            int i = 1;
             Character compare;
 
             while (oldline != null) {
@@ -28,45 +27,80 @@ public class Racksacks_Part_two {
                 oldline = reader.readLine();
             }
 
-            while (i < lines.size()) {
+            for (int i = 2; i < lines.size(); i += 3) {
 
-                if (i % 3 == 0) {
-                    int n = 0;
-                    String first = lines.get(i - 3);
-                    String second = lines.get(i - 2);
-                    String third = lines.get(i - 1);
+                int n = 0;
+                String first = lines.get(i - 2);
+                String second = lines.get(i - 1);
+                String third = lines.get(i);
+                Map<Character, List<Integer>> similar = new HashMap<>();
 
-                    while (n < first.length()) {
-                        compare = first.charAt(n);
+                while (n < first.length()) {
+                    compare = first.charAt(n);
+                    for (int f = 0; f < first.length(); f++) {
+                        if (compare == first.charAt(f)) {
+                            List<Integer> arrayList = new ArrayList<>();
+                            arrayList.add(1);
+                            arrayList.add(0);
+                            arrayList.add(0);
 
-                        for (int f = 0; f < first.length(); f++) {
-                            if (compare == first.charAt(n)) {
-                                List<Integer> arrayList = new ArrayList<>();
-                                arrayList.add(1);
-                                arrayList.add(0);
-                                arrayList.add(0);
+                            similar.put(compare, arrayList);
 
-                                similar.put(compare, arrayList);
-                            }
                         }
-                        for (int s = 0; s < second.length(); s++) {
-                            if (compare == second.charAt(n)) {
-                                List<Integer> foundList = similar.get(compare);
-                                foundList.set(1, 1);
-                            }
-                        }
-                        for (int t = 0; t < third.length(); t++) {
-                            if (compare == third.charAt(n)) {
-                                List<Integer> foundList = similar.get(compare);
-                                foundList.set(2, 1);
-                            }
-                        }
-                        n++;
                     }
+                    for (int s = 0; s < second.length(); s++) {
+                        if (compare == second.charAt(s)) {
+                            similar.get(compare).set(1, 1);
+                        }
+                    }
+
+                    // hashmap={
+                    // "s": [2,3,1,42],
+                    // "s": [2,3,1,42],
+                    // "s": [2,3,1,42],
+                    // }
+
+                    for (int t = 0; t < third.length(); t++) {
+                        if (compare == third.charAt(t)) {
+                            similar.get(compare).set(2, 1);
+                        }
+                    }
+                    n++;
                 }
-                i++;
+                outterArray.add(similar);
             }
-            System.out.println(similar);
+            System.out.println(outterArray);
+
+            ArrayList<Character> duplicants = new ArrayList<>();
+
+            for (int i = 0; i < outterArray.size(); i++) {
+                outterArray.get(i).forEach((key, value) -> {
+
+                    int osszeg = 0;
+
+                    osszeg += value.get(0);
+                    osszeg += value.get(1);
+                    osszeg += value.get(2);
+
+                    if (osszeg == 3) {
+                        duplicants.add(key);
+                    }
+                });
+            }
+
+            int letterSum = 0;
+
+            for (int s = 0; s < duplicants.size(); s++) {
+                char character = duplicants.get(s);
+
+                if (Character.isUpperCase(character)) {
+                    letterSum += character - 'A' + 27;
+                } else {
+                    letterSum += character - 'a' + 1;
+                }
+
+            }
+            System.out.print(letterSum);
 
         } catch (
 
